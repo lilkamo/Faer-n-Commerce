@@ -1,0 +1,15 @@
+<div class="faern-queue-wrap">
+  {{#if isEmpty}}
+    <div class="faern-empty-state">
+      <i class="fas fa-check-circle fa-3x"></i>
+      <h3>{{localize "FAERN.ApprovalQueue.Empty"}}</h3>
+      <p class="faern-muted">{{localize "FAERN.ApprovalQueue.EmptyHint"}}</p>
+    </div>
+  {{else}}
+    <div class="queue-list">
+      {{#each requests}}
+        {{> "modules/faer-n-commerce/templates/partials/request-card.hbs"}}
+      {{/each}}
+    </div>
+  {{/if}}
+</div>

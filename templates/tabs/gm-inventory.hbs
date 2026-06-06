@@ -1,0 +1,34 @@
+<div class="tab faern-tab {{#if (eq tabs.inventory.active true)}}active{{/if}}" data-group="primary" data-tab="inventory">
+  <div class="faern-drop-zone" id="faern-inv-drop">
+    <i class="fas fa-inbox"></i>
+    <span>{{localize "FAERN.Inventory.DropZone"}}</span>
+  </div>
+
+  {{#if fullInventory.length}}
+  <div class="faern-inv-table-wrap inventory-list">
+    <table class="faern-inv-table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>{{localize "FAERN.Inventory.Item"}}</th>
+          <th>{{localize "FAERN.Inventory.Quantity"}}</th>
+          <th>{{localize "FAERN.Inventory.Price"}}</th>
+          <th>{{localize "FAERN.Inventory.Availability"}}</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each fullInventory}}
+          {{> "modules/faer-n-commerce/templates/partials/inventory-row.hbs"}}
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+  {{else}}
+  <div class="faern-empty-state">
+    <i class="fas fa-box-open"></i>
+    <p>{{localize "FAERN.Inventory.Empty"}}</p>
+    <p class="faern-hint">{{localize "FAERN.Inventory.EmptyHint"}}</p>
+  </div>
+  {{/if}}
+</div>

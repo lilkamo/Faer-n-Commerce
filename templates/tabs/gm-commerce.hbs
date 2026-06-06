@@ -1,0 +1,50 @@
+<div class="tab faern-tab {{#if (eq tabs.commerce.active true)}}active{{/if}}" data-group="primary" data-tab="commerce">
+  <div class="faern-form-section">
+    <h3 class="faern-section-title">{{localize "FAERN.Commerce.Pricing"}}</h3>
+    <div class="faern-form-group">
+      <label>{{localize "FAERN.Field.PriceMultiplier"}}</label>
+      <div class="faern-slider-row">
+        <input type="range" name="system.defaultPriceMultiplier" min="0.1" max="5" step="0.05"
+          value="{{system.defaultPriceMultiplier}}" class="faern-slider">
+        <span class="faern-slider-value">×{{system.defaultPriceMultiplier}}</span>
+      </div>
+      <p class="faern-hint">{{localize "FAERN.Commerce.PriceMultiplierHint"}}</p>
+    </div>
+
+    <h3 class="faern-section-title">{{localize "FAERN.Commerce.Selling"}}</h3>
+    <div class="faern-form-group faern-form-group--checkbox">
+      <input type="checkbox" name="system.acceptsSell" id="acceptsSell"
+        {{#if system.acceptsSell}}checked{{/if}}>
+      <label for="acceptsSell">{{localize "FAERN.Field.AcceptsSell"}}</label>
+    </div>
+
+    <h3 class="faern-section-title">{{localize "FAERN.Commerce.BuyingCategories"}}</h3>
+    <p class="faern-hint">{{localize "FAERN.Commerce.BuyingCategoriesHint"}}</p>
+    <div class="faern-categories-grid">
+      {{#each (array "weapon" "equipment" "consumable" "tool" "loot" "container" "spell" "feat" "background") as |cat|}}
+        <label class="faern-category-chip">
+          <input type="checkbox" name="system.buyingCategories" value="{{cat}}"
+            {{#if (includes ../system.buyingCategories cat)}}checked{{/if}}>
+          {{cat}}
+        </label>
+      {{/each}}
+    </div>
+
+    <h3 class="faern-section-title">{{localize "FAERN.Commerce.Finance"}}</h3>
+    <div class="faern-finance-summary">
+      <div class="faern-finance-item">
+        <span>{{localize "FAERN.Finance.Revenue"}}</span>
+        <strong class="faern-gold">{{system.totalRevenue}} gp</strong>
+      </div>
+      <div class="faern-finance-item">
+        <span>{{localize "FAERN.Finance.Expenses"}}</span>
+        <strong>{{system.totalExpenses}} gp</strong>
+      </div>
+      <div class="faern-finance-item faern-finance-item--total">
+        <span>{{localize "FAERN.Finance.Net"}}</span>
+        <strong class="{{#if (gte system.totalValueGp 0)}}faern-gold{{else}}faern-red{{/if}}">{{system.totalValueGp}} gp</strong>
+      </div>
+    </div>
+    {{> "modules/faer-n-commerce/templates/partials/currency-display.hbs" currency=system.currency}}
+  </div>
+</div>

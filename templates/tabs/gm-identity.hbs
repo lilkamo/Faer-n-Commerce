@@ -1,0 +1,62 @@
+<div class="tab faern-tab {{#if (eq tabs.identity.active true)}}active{{/if}}" data-group="primary" data-tab="identity">
+  <div class="faern-form-section">
+    <div class="faern-form-row">
+      <div class="faern-form-group faern-form-group--wide">
+        <label>{{localize "FAERN.Field.ShopName"}}</label>
+        <input type="text" name="name" value="{{document.name}}" class="faern-input">
+      </div>
+      <div class="faern-form-group">
+        <label>{{localize "FAERN.Field.StoreType"}}</label>
+        <select name="system.storeType" class="faern-select">
+          {{#each storeTypeChoices as |label key|}}
+            <option value="{{key}}" {{#if (eq key ../system.storeType)}}selected{{/if}}>{{label}}</option>
+          {{/each}}
+        </select>
+      </div>
+    </div>
+
+    <div class="faern-form-row">
+      <div class="faern-form-group faern-form-group--wide">
+        <label>{{localize "FAERN.Field.MerchantName"}}</label>
+        <input type="text" name="system.merchantName" value="{{system.merchantName}}" class="faern-input"
+          placeholder="{{localize "FAERN.Field.MerchantNamePlaceholder"}}">
+      </div>
+    </div>
+
+    <div class="faern-form-row faern-image-pickers">
+      <div class="faern-form-group">
+        <label>{{localize "FAERN.Field.MerchantPortrait"}}</label>
+        <div class="faern-image-picker">
+          {{#if system.merchantPortrait}}
+            <img src="{{system.merchantPortrait}}" class="faern-picker-preview" alt="">
+          {{else}}
+            <div class="faern-picker-placeholder"><i class="fas fa-user"></i></div>
+          {{/if}}
+          <button type="button" data-action="pickPortrait" class="faern-picker-btn">
+            <i class="fas fa-folder-open"></i> {{localize "FAERN.Field.Browse"}}
+          </button>
+        </div>
+      </div>
+      <div class="faern-form-group faern-form-group--wide">
+        <label>{{localize "FAERN.Field.StoreBanner"}}</label>
+        <div class="faern-image-picker faern-image-picker--banner">
+          {{#if system.storeBanner}}
+            <img src="{{system.storeBanner}}" class="faern-picker-preview faern-picker-preview--wide" alt="">
+          {{else}}
+            <div class="faern-picker-placeholder"><i class="fas fa-image"></i></div>
+          {{/if}}
+          <button type="button" data-action="pickBanner" class="faern-picker-btn">
+            <i class="fas fa-folder-open"></i> {{localize "FAERN.Field.Browse"}}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="faern-form-group faern-form-group--full">
+      <label>{{localize "FAERN.Field.Description"}}</label>
+      <div class="faern-editor-wrap">
+        {{editor description target="system.description" editable=true button=false owner=true}}
+      </div>
+    </div>
+  </div>
+</div>

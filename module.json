@@ -1,0 +1,19 @@
+{
+  "id": "faer-n-commerce",
+  "title": "Faerûn Commerce",
+  "description": "Immersive merchant, storefront, trading, haggling, and economic systems for D&D 5e on Foundry VTT v14.",
+  "version": "0.1.0",
+  "compatibility": { "minimum": "13", "verified": "14" },
+  "relationships": {
+    "systems": [{ "id": "dnd5e", "type": "requires", "compatibility": { "minimum": "3.0" } }]
+  },
+  "esmodules": ["scripts/main.js"],
+  "styles": ["styles/faer-n-commerce.css"],
+  "languages": [{ "lang": "en", "name": "English", "path": "lang/en.json" }],
+  "documentTypes": {
+    "JournalEntry": {
+      "shopfront": { "htmlFields": ["system.description"] }
+    }
+  },
+  "socket": true
+}

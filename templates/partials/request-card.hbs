@@ -1,0 +1,27 @@
+<div class="faern-request-card faern-status-{{status}}" data-request-id="{{_id}}" data-shopfront-id="{{shopfrontId}}">
+  <div class="faern-req-header">
+    <img class="faern-req-avatar" src="{{actorImg}}" alt="{{actorName}}">
+    <div class="faern-req-identity">
+      <strong class="faern-req-actor">{{actorName}}</strong>
+      <span class="faern-req-user">{{localize "FAERN.RequestCard.Player"}}: {{userName}}</span>
+      <span class="faern-req-shop">{{shopName}}</span>
+    </div>
+    <span class="faern-req-time">{{formattedTime}}</span>
+    <span class="faern-status-pill faern-status-pill--{{status}}">{{statusInfo.label}}</span>
+  </div>
+  <div class="faern-req-items">{{itemSummary}}</div>
+  {{#if playerMessage}}
+    <blockquote class="faern-req-message">"{{playerMessage}}"</blockquote>
+  {{/if}}
+  <div class="faern-req-actions">
+    <button type="button" data-action="openRequest" class="faern-action-btn faern-btn-secondary">
+      <i class="fas fa-eye"></i> {{localize "FAERN.RequestCard.View"}}
+    </button>
+    <button type="button" data-action="quickApprove" class="faern-action-btn faern-btn-approve">
+      <i class="fas fa-check"></i> {{localize "FAERN.RequestCard.Approve"}}
+    </button>
+    <button type="button" data-action="quickReject" class="faern-action-btn faern-btn-reject">
+      <i class="fas fa-times"></i> {{localize "FAERN.RequestCard.Reject"}}
+    </button>
+  </div>
+</div>

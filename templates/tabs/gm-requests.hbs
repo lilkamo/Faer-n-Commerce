@@ -1,0 +1,33 @@
+<div class="tab faern-tab {{#if (eq tabs.requests.active true)}}active{{/if}}" data-group="primary" data-tab="requests">
+  {{#if pendingRequests.length}}
+  <div class="requests-list">
+    {{#each pendingRequests}}
+      <div class="faern-request-card-mini" data-request-id="{{_id}}" data-shopfront-id="{{../document.id}}">
+        <div class="faern-req-header">
+          <img class="faern-req-avatar" src="{{actorImg}}" alt="{{actorName}}">
+          <div class="faern-req-identity">
+            <strong>{{actorName}}</strong>
+            <span>{{userName}}</span>
+          </div>
+          <span class="faern-req-time">{{formattedTime}}</span>
+          <span class="faern-status-pill faern-status-pill--{{status}}">{{status}}</span>
+        </div>
+        <div class="faern-req-items">
+          {{#each items}}<span>{{itemName}} ×{{quantity}}</span>{{/each}}
+        </div>
+        {{#if playerMessage}}<blockquote class="faern-req-message">"{{playerMessage}}"</blockquote>{{/if}}
+        <div class="faern-req-actions">
+          <button type="button" data-action="openRequest" class="faern-action-btn faern-btn-secondary">
+            <i class="fas fa-eye"></i> {{localize "FAERN.RequestCard.View"}}
+          </button>
+        </div>
+      </div>
+    {{/each}}
+  </div>
+  {{else}}
+  <div class="faern-empty-state">
+    <i class="fas fa-check-circle"></i>
+    <p>{{localize "FAERN.Requests.Empty"}}</p>
+  </div>
+  {{/if}}
+</div>

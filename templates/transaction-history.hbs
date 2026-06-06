@@ -1,0 +1,75 @@
+<div class="faern-transaction-history">
+  <div class="faern-history-header">
+    <h2><i class="fas fa-scroll"></i> {{shopName}} — {{localize "FAERN.History.Title"}}</h2>
+    <button type="button" data-action="exportLog" class="faern-action-btn faern-btn-secondary">
+      <i class="fas fa-download"></i> {{localize "FAERN.History.Export"}}
+    </button>
+  </div>
+
+  <div class="faern-history-filters">
+    <select name="filterType" class="faern-select">
+      <option value="all" {{#if (eq filters.type "all")}}selected{{/if}}>
+        {{localize "FAERN.History.Filter.AllTypes"}}
+      </option>
+      <option value="purchase" {{#if (eq filters.type "purchase")}}selected{{/if}}>
+        {{localize "FAERN.History.Filter.Purchases"}}
+      </option>
+      <option value="sale" {{#if (eq filters.type "sale")}}selected{{/if}}>
+        {{localize "FAERN.History.Filter.Sales"}}
+      </option>
+    </select>
+
+    <select name="filterActor" class="faern-select">
+      <option value="">{{localize "FAERN.History.Filter.AllCharacters"}}</option>
+      {{#each actors}}
+        <option value="{{id}}" {{#if (eq id ../filters.actorId)}}selected{{/if}}>{{name}}</option>
+      {{/each}}
+    </select>
+
+    <input type="text" name="search" class="faern-search-input faern-input"
+           value="{{filters.search}}"
+           placeholder="{{localize 'FAERN.History.Filter.Search'}}">
+
+    <button type="button" data-action="applyFilter" class="faern-action-btn">
+      <i class="fas fa-filter"></i> {{localize "FAERN.History.Filter.Apply"}}
+    </button>
+  </div>
+
+  {{#if isEmpty}}
+    <div class="faern-empty-state">
+      <i class="fas fa-scroll"></i>
+      <p>{{localize "FAERN.History.Empty"}}</p>
+    </div>
+  {{else}}
+    <div class="faern-history-table-wrap history-table-wrap">
+      <table class="faern-history-table">
+        <thead>
+          <tr>
+            <th>{{localize "FAERN.History.Date"}}</th>
+            <th>{{localize "FAERN.History.Time"}}</th>
+            <th>{{localize "FAERN.History.Type"}}</th>
+            <th>{{localize "FAERN.History.Character"}}</th>
+            <th>{{localize "FAERN.History.Items"}}</th>
+            <th>{{localize "FAERN.History.Total"}}</th>
+            <th>{{localize "FAERN.History.Notes"}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each log}}
+            <tr class="faern-history-row">
+              <td class="faern-history-date">{{formattedDate}}</td>
+              <td class="faern-history-time">{{formattedTime}}</td>
+              <td>
+                <span class="faern-type-badge faern-type--{{type}}">{{type}}</span>
+              </td>
+              <td>{{actorName}}</td>
+              <td class="faern-history-items">{{itemSummary}}</td>
+              <td class="faern-gold faern-history-total">{{formattedTotal}}</td>
+              <td class="faern-history-notes">{{notes}}</td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+  {{/if}}
+</div>

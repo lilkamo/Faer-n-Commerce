@@ -1,0 +1,130 @@
+<div class="faern-browse-layout">
+  {{!-- Left: Inventory --}}
+  <div class="faern-browse-left">
+    <div class="faern-browse-controls">
+      <div class="faern-search-wrap">
+        <i class="fas fa-search"></i>
+        <input type="text" class="faern-search-input" placeholder="{{localize "FAERN.Browse.Search"}}" value="{{searchQuery}}">
+      </div>
+      <div class="faern-filter-pills">
+        <button type="button" data-action="filterCategory" data-filter="all"
+          class="faern-filter-pill {{#if (eq currentFilter "all")}}active{{/if}}">
+          {{localize "FAERN.Browse.FilterAll"}}
+        </button>
+        {{#each itemTypes as |type|}}
+          <button type="button" data-action="filterCategory" data-filter="{{type}}"
+            class="faern-filter-pill {{#if (eq type ../currentFilter)}}active{{/if}}">
+            {{type}}
+          </button>
+        {{/each}}
+      </div>
+    </div>
+
+    {{#if system.isOpen}}
+      {{#if items.length}}
+        <div class="faern-item-grid inventory-scroll">
+          {{#each items}}
+          <div class="faern-item-card {{#if isLimited}}faern-item--limited{{/if}}"
+            data-entry-id="{{entry._id}}">
+            <div class="faern-item-card-img">
+              <img src="{{img}}" alt="{{name}}">
+              {{#if isLimited}}
+                <span class="faern-stock-badge">{{localize "FAERN.Browse.Limited"}}</span>
+              {{/if}}
+            </div>
+            <div class="faern-item-card-body">
+              <h4 class="faern-item-card-name">{{name}}</h4>
+              {{#if rarity}}<span class="faern-rarity faern-rarity--{{rarity}}">{{rarity}}</span>{{/if}}
+              <p class="faern-item-card-price faern-gold">{{formattedPrice}}</p>
+              <p class="faern-item-stock faern-muted">
+                {{localize "FAERN.Browse.InStock"}}: {{stockDisplay}}
+              </p>
+            </div>
+            <div class="faern-item-card-footer">
+              {{#if inCart}}
+                <span class="faern-in-cart">
+                  <i class="fas fa-check"></i> ×{{cartQuantity}}
+                </span>
+              {{/if}}
+              <button type="button" data-action="addToCart" class="faern-add-btn">
+                <i class="fas fa-plus"></i>
+              </button>
+            </div>
+          </div>
+          {{/each}}
+        </div>
+      {{else}}
+        <div class="faern-empty-state">
+          <i class="fas fa-box-open"></i>
+          <p>{{localize "FAERN.Browse.NoItems"}}</p>
+        </div>
+      {{/if}}
+    {{else}}
+      <div class="faern-shop-closed-overlay">
+        <i class="fas fa-door-closed"></i>
+        <h3>{{localize "FAERN.Shop.ClosedTitle"}}</h3>
+        <p>{{localize "FAERN.Shop.ClosedMessage"}}</p>
+      </div>
+    {{/if}}
+  </div>
+
+  {{!-- Right: Cart / Request --}}
+  <div class="faern-browse-right">
+    <h3 class="faern-cart-title">{{localize "FAERN.Browse.YourRequest"}}</h3>
+
+    {{#if cartEmpty}}
+      <div class="faern-cart-empty">
+        <i class="fas fa-shopping-basket"></i>
+        <p>{{localize "FAERN.Browse.CartEmpty"}}</p>
+      </div>
+    {{else}}
+      <ul class="faern-cart-list">
+        {{#each cartItems}}
+          <li class="faern-cart-item" data-entry-id="{{entry._id}}">
+            <img src="{{item.img}}" alt="{{item.name}}" class="faern-cart-item-img">
+            <div class="faern-cart-item-info">
+              <span class="faern-cart-item-name">{{item.name}}</span>
+              <span class="faern-cart-item-price faern-gold">{{formattedPrice}}</span>
+            </div>
+            <input type="number" class="cart-qty-input" value="{{quantity}}" min="1">
+            <button type="button" data-action="removeFromCart" class="faern-remove-btn">
+              <i class="fas fa-times"></i>
+            </button>
+          </li>
+        {{/each}}
+      </ul>
+      <div class="faern-cart-total">
+        <span>{{localize "FAERN.Browse.Total"}}</span>
+        <strong class="faern-gold">{{cartTotal}} gp</strong>
+      </div>
+    {{/if}}
+
+    {{#if hasActor}}
+      {{#if (gt myActors.length 1)}}
+        <div class="faern-form-group">
+          <label>{{localize "FAERN.Browse.Character"}}</label>
+          <select name="actorId" class="faern-select">
+            {{#each myActors}}
+              <option value="{{id}}">{{name}}</option>
+            {{/each}}
+          </select>
+        </div>
+      {{else}}
+        <input type="hidden" name="actorId" value="{{myActors.0.id}}">
+      {{/if}}
+    {{/if}}
+
+    <div class="faern-form-group">
+      <label>{{localize "FAERN.Browse.MessageToMerchant"}}</label>
+      <textarea name="playerMessage" class="faern-textarea"
+        placeholder="{{localize "FAERN.Browse.MessagePlaceholder"}}"></textarea>
+    </div>
+
+    <button type="button" data-action="submitRequest"
+      class="faern-submit-btn {{#if cartEmpty}}faern-btn-disabled{{/if}}"
+      {{#if cartEmpty}}disabled{{/if}}>
+      <i class="fas fa-paper-plane"></i>
+      {{localize "FAERN.Browse.SubmitRequest"}}
+    </button>
+  </div>
+</div>

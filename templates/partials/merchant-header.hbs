@@ -1,0 +1,36 @@
+<div class="faern-merchant-header" {{#if system.storeBanner}}style="--faern-banner: url('{{system.storeBanner}}')"{{/if}}>
+  <div class="faern-header-banner">
+    <div class="faern-header-overlay"></div>
+  </div>
+  <div class="faern-header-body">
+    <div class="faern-portrait-wrap">
+      {{#if system.merchantPortrait}}
+        <img class="faern-merchant-portrait" src="{{system.merchantPortrait}}" alt="{{system.merchantName}}">
+      {{else}}
+        <div class="faern-merchant-portrait faern-portrait-placeholder">
+          <i class="fas fa-user-circle"></i>
+        </div>
+      {{/if}}
+    </div>
+    <div class="faern-merchant-info">
+      <h1 class="faern-shop-name">{{document.name}}</h1>
+      {{#if system.merchantName}}
+        <p class="faern-merchant-name">{{localize "FAERN.Field.By"}} {{system.merchantName}}</p>
+      {{/if}}
+      <span class="faern-status-badge {{#if system.isOpen}}faern-status--open{{else}}faern-status--closed{{/if}}">
+        <span class="faern-status-dot"></span>
+        {{#if system.isOpen}}{{localize "FAERN.Shop.Open"}}{{else}}{{localize "FAERN.Shop.Closed"}}{{/if}}
+      </span>
+    </div>
+    {{#if isGM}}
+    <div class="faern-header-actions">
+      <button type="button" data-action="toggleOpen" class="faern-header-btn" title="{{localize "FAERN.GMSheet.ToggleOpen"}}">
+        <i class="fas {{#if system.isOpen}}fa-lock-open{{else}}fa-lock{{/if}}"></i>
+      </button>
+      <button type="button" data-action="placePin" class="faern-header-btn" title="{{localize "FAERN.GMSheet.PlacePin"}}">
+        <i class="fas fa-map-pin"></i>
+      </button>
+    </div>
+    {{/if}}
+  </div>
+</div>

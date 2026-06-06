@@ -1,0 +1,42 @@
+<tr class="faern-inv-row {{entry.availability}}" data-entry-id="{{entry._id}}">
+  <td class="faern-inv-img">
+    <img src="{{item.img}}" alt="{{item.name}}" width="36" height="36">
+  </td>
+  <td class="faern-inv-name">
+    <span class="faern-item-name">{{item.name}}</span>
+    {{#if item.system.rarity}}
+      <span class="faern-item-rarity faern-rarity--{{item.system.rarity}}">{{item.system.rarity}}</span>
+    {{/if}}
+  </td>
+  <td class="faern-inv-qty">
+    <input type="number" class="faern-qty-input" name="inventory.{{@index}}.quantity"
+      value="{{#if (eq entry.quantity -1)}}∞{{else}}{{entry.quantity}}{{/if}}"
+      min="-1" placeholder="∞">
+  </td>
+  <td class="faern-inv-price">
+    <div class="faern-price-wrap">
+      <input type="checkbox" class="faern-price-override-toggle" name="inventory.{{@index}}.priceOverride.enabled"
+        {{#if entry.priceOverride.enabled}}checked{{/if}}>
+      <input type="number" class="faern-price-input" name="inventory.{{@index}}.priceOverride.value"
+        value="{{entry.priceOverride.value}}" min="0" step="0.01"
+        {{#unless entry.priceOverride.enabled}}placeholder="{{formattedPrice}}"{{/unless}}>
+      <select name="inventory.{{@index}}.priceOverride.denomination" class="faern-denom-select">
+        {{#each (array "cp" "sp" "ep" "gp" "pp") as |d|}}
+          <option value="{{d}}" {{#if (eq d ../entry.priceOverride.denomination)}}selected{{/if}}>{{d}}</option>
+        {{/each}}
+      </select>
+    </div>
+  </td>
+  <td class="faern-inv-avail">
+    <select data-action="setAvailability" class="faern-avail-select faern-avail--{{entry.availability}}">
+      {{#each ../availabilityChoices as |label key|}}
+        <option value="{{key}}" {{#if (eq key ../entry.availability)}}selected{{/if}}>{{label}}</option>
+      {{/each}}
+    </select>
+  </td>
+  <td class="faern-inv-actions">
+    <button type="button" data-action="removeInventoryItem" class="faern-icon-btn faern-btn-danger" title="{{localize "FAERN.Inventory.Remove"}}">
+      <i class="fas fa-times"></i>
+    </button>
+  </td>
+</tr>

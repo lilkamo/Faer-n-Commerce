@@ -1,0 +1,38 @@
+<div class="tab faern-tab {{#if (eq tabs.history.active true)}}active{{/if}}" data-group="primary" data-tab="history">
+  <div class="faern-history-toolbar">
+    <button type="button" data-action="openHistory" class="faern-action-btn faern-btn-secondary">
+      <i class="fas fa-external-link-alt"></i> {{localize "FAERN.History.FullView"}}
+    </button>
+  </div>
+  {{#if transactionLog.length}}
+  <div class="history-list faern-history-table-wrap">
+    <table class="faern-history-table">
+      <thead>
+        <tr>
+          <th>{{localize "FAERN.History.Date"}}</th>
+          <th>{{localize "FAERN.History.Type"}}</th>
+          <th>{{localize "FAERN.History.Character"}}</th>
+          <th>{{localize "FAERN.History.Items"}}</th>
+          <th>{{localize "FAERN.History.Total"}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each transactionLog}}
+        <tr>
+          <td>{{formattedDate}}</td>
+          <td><span class="faern-type-badge faern-type--{{type}}">{{type}}</span></td>
+          <td>{{actorName}}</td>
+          <td class="faern-items-cell">{{itemSummary}}</td>
+          <td class="faern-gold">{{totalValueGp}} gp</td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+  {{else}}
+  <div class="faern-empty-state">
+    <i class="fas fa-scroll"></i>
+    <p>{{localize "FAERN.History.Empty"}}</p>
+  </div>
+  {{/if}}
+</div>
