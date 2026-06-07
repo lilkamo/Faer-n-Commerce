@@ -26,10 +26,10 @@
   <table class="faern-detail-items">
     <thead>
       <tr>
-        <th>{{localize "FAERN.Detail.Item"}}</th>
-        <th>{{localize "FAERN.Detail.Qty"}}</th>
-        <th>{{localize "FAERN.Detail.UnitPrice"}}</th>
-        <th>{{localize "FAERN.Detail.Subtotal"}}</th>
+        <th>{{localize "FAERN.RequestDetail.Item"}}</th>
+        <th>{{localize "FAERN.RequestDetail.Qty"}}</th>
+        <th>{{localize "FAERN.RequestDetail.UnitPrice"}}</th>
+        <th>{{localize "FAERN.RequestDetail.Subtotal"}}</th>
       </tr>
     </thead>
     <tbody>
@@ -44,7 +44,7 @@
     </tbody>
     <tfoot>
       <tr class="faern-detail-total-row">
-        <td colspan="3"><strong>{{localize "FAERN.Detail.Total"}}</strong></td>
+        <td colspan="3"><strong>{{localize "FAERN.RequestDetail.Total"}}</strong></td>
         <td class="faern-gold"><strong>{{totalFormatted}}</strong></td>
       </tr>
     </tfoot>
@@ -61,7 +61,7 @@
   <!-- Counter Offer (if countered) -->
   {{#if isCountered}}
     <div class="faern-counter-offer">
-      <h4><i class="fas fa-exchange-alt"></i> {{localize "FAERN.Detail.CounterOffer"}}</h4>
+      <h4><i class="fas fa-exchange-alt"></i> {{localize "FAERN.RequestDetail.CounterOffer"}}</h4>
       {{#if request.gmResponse.message}}
         <p class="faern-counter-message">{{request.gmResponse.message}}</p>
       {{/if}}
@@ -74,10 +74,10 @@
       {{/if}}
       <div class="faern-counter-actions">
         <button type="button" data-action="approve" class="faern-action-btn faern-action-btn--approve">
-          <i class="fas fa-check"></i> {{localize "FAERN.Detail.AcceptCounter"}}
+          <i class="fas fa-check"></i> {{localize "FAERN.RequestDetail.AcceptCounter"}}
         </button>
         <button type="button" data-action="reject" class="faern-action-btn faern-action-btn--reject">
-          <i class="fas fa-times"></i> {{localize "FAERN.Detail.DeclineCounter"}}
+          <i class="fas fa-times"></i> {{localize "FAERN.RequestDetail.DeclineCounter"}}
         </button>
       </div>
     </div>
@@ -86,36 +86,36 @@
   <!-- GM Response Area -->
   <div class="faern-gm-response">
     <div class="form-group">
-      <label>{{localize "FAERN.Detail.GMMessage"}}</label>
+      <label>{{localize "FAERN.RequestDetail.GMMessage"}}</label>
       <textarea name="gmMessage" class="faern-textarea"
-        placeholder="{{localize 'FAERN.Detail.GMMessagePlaceholder'}}"></textarea>
+        placeholder="{{localize 'FAERN.RequestDetail.GMMessagePlaceholder'}}"></textarea>
     </div>
   </div>
 
   <!-- Primary Actions -->
   <div class="faern-detail-actions">
     <button type="button" data-action="approve" class="faern-action-btn faern-action-btn--approve">
-      <i class="fas fa-check"></i> {{localize "FAERN.Detail.Approve"}}
+      <i class="fas fa-check"></i> {{localize "FAERN.RequestDetail.Approve"}}
     </button>
     <button type="button" data-action="toggleCounter" class="faern-action-btn faern-action-btn--counter">
-      <i class="fas fa-exchange-alt"></i> {{localize "FAERN.Detail.Counter"}}
+      <i class="fas fa-exchange-alt"></i> {{localize "FAERN.RequestDetail.Counter"}}
     </button>
     <button type="button" data-action="reject" class="faern-action-btn faern-action-btn--reject">
-      <i class="fas fa-times"></i> {{localize "FAERN.Detail.Reject"}}
+      <i class="fas fa-times"></i> {{localize "FAERN.RequestDetail.Reject"}}
     </button>
   </div>
 
   <!-- Counter Form (toggled) -->
   {{#if showCounter}}
     <div class="faern-counter-form">
-      <h4>{{localize "FAERN.Detail.SetCounterPrices"}}</h4>
+      <h4>{{localize "FAERN.RequestDetail.SetCounterPrices"}}</h4>
       <table class="faern-counter-table">
         <thead>
           <tr>
-            <th>{{localize "FAERN.Detail.Item"}}</th>
-            <th>{{localize "FAERN.Detail.Qty"}}</th>
-            <th>{{localize "FAERN.Detail.NewPrice"}}</th>
-            <th>{{localize "FAERN.Detail.Denom"}}</th>
+            <th>{{localize "FAERN.RequestDetail.Item"}}</th>
+            <th>{{localize "FAERN.RequestDetail.Qty"}}</th>
+            <th>{{localize "FAERN.RequestDetail.NewPrice"}}</th>
+            <th>{{localize "FAERN.RequestDetail.Denom"}}</th>
           </tr>
         </thead>
         <tbody>
@@ -139,12 +139,12 @@
         </tbody>
       </table>
       <div class="form-group">
-        <label>{{localize "FAERN.Detail.CounterMessage"}}</label>
+        <label>{{localize "FAERN.RequestDetail.CounterMessage"}}</label>
         <textarea name="counterMessage" class="faern-textarea"
-          placeholder="{{localize 'FAERN.Detail.CounterMessagePlaceholder'}}"></textarea>
+          placeholder="{{localize 'FAERN.RequestDetail.CounterMessagePlaceholder'}}"></textarea>
       </div>
       <button type="button" data-action="submitCounter" class="faern-action-btn faern-action-btn--counter">
-        <i class="fas fa-paper-plane"></i> {{localize "FAERN.Detail.SendCounter"}}
+        <i class="fas fa-paper-plane"></i> {{localize "FAERN.RequestDetail.SendCounter"}}
       </button>
     </div>
   {{/if}}

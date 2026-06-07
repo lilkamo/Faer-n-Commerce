@@ -49,7 +49,51 @@ export class PurchaseManager {
     }, 0);
 
     const actor = game.actors.get(request.actorId);
-    const user = game.users.get(request.userId);
+
+    // Transfer items to actor and deduct gold (dnd5e API)
+    if (actor) {
+      // Deduct gold from actor's currency
+      const currency = foundry.utils.deepClone(actor.system.currency ?? {});
+      let remainingCost = totalGp;
+
+      // Deduct in order: pp → gp → ep → sp → cp (convert to gp equivalent)
+      const denomOrder = [
+        { key: "pp", rate: 10 },
+        { key: "gp", rate: 1 },
+        { key: "ep", rate: 0.5 },
+        { key: "sp", rate: 0.1 },
+        { key: "cp", rate: 0.01 },
+      ];
+      for (const { key, rate } of denomOrder) {
+        if (remainingCost <= 0) break;
+        const available = (currency[key] ?? 0) * rate;
+        if (available <= 0) continue;
+        const deductGp = Math.min(available, remainingCost);
+        const deductUnits = Math.ceil(deductGp / rate);
+        currency[key] = Math.max(0, (currency[key] ?? 0) - deductUnits);
+        remainingCost -= deductUnits * rate;
+      }
+      await actor.update({ "system.currency": currency });
+
+      // Grant items from their UUIDs
+      const itemDatas = [];
+      for (const reqItem of itemsToDeduct) {
+        try {
+          const source = await fromUuid(reqItem.itemUuid);
+          if (source) {
+            const itemData = source.toObject();
+            itemData.system ??= {};
+            if (itemData.system.quantity !== undefined) {
+              itemData.system.quantity = reqItem.quantity;
+            }
+            itemDatas.push(itemData);
+          }
+        } catch (e) {
+          console.warn(`${FAERN.ID} | Could not resolve item UUID ${reqItem.itemUuid}:`, e);
+        }
+      }
+      if (itemDatas.length) await actor.createEmbeddedDocuments("Item", itemDatas);
+    }
 
     const updatedRequests = shopfrontDoc.system.purchaseRequests.map(r =>
       r._id === requestId

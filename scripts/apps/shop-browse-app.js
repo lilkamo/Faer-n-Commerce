@@ -215,11 +215,13 @@ export class ShopBrowseApp extends HandlebarsApplicationMixin(ApplicationV2) {
 
     SocketHandler.emit(FAERN.SOCKET_EVENTS.SUBMIT_REQUEST, {
       shopfrontId: this._shopfront.id,
-      userId: game.userId,
-      actorId,
-      type: "buy",
-      items,
-      playerMessage: message,
+      requestData: {
+        userId: game.userId,
+        actorId,
+        type: "buy",
+        items,
+        playerMessage: message,
+      },
     });
 
     this._cart.clear();

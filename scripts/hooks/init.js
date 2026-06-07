@@ -92,5 +92,20 @@ export function registerInitHooks() {
     default: true,
   });
 
+  // ── Handlebars helpers ──────────────────────────────────────
+  Handlebars.registerHelper("array", (...args) => args.slice(0, -1));
+
+  Handlebars.registerHelper("includes", (arr, value) => {
+    if (!Array.isArray(arr)) return false;
+    return arr.includes(value);
+  });
+
+  Handlebars.registerHelper("gte", (a, b) => a >= b);
+
+  Handlebars.registerHelper("multiply", (a, b) => {
+    const result = parseFloat(a) * parseFloat(b);
+    return isNaN(result) ? 0 : Math.round(result * 100) / 100;
+  });
+
   console.log(`${FAERN.ID} | Init hooks registered`);
 }

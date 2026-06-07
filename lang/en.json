@@ -133,7 +133,14 @@
   "FAERN.RequestDetail.Approve":            "Approve",
   "FAERN.RequestDetail.Counter":            "Counter",
   "FAERN.RequestDetail.Reject":             "Reject",
-  "FAERN.RequestDetail.NotFound":           "Request not found.",
+  "FAERN.RequestDetail.AcceptCounter":              "Accept Counter",
+  "FAERN.RequestDetail.DeclineCounter":             "Decline Counter",
+  "FAERN.RequestDetail.SetCounterPrices":           "Set Counter Prices",
+  "FAERN.RequestDetail.NewPrice":                   "New Price",
+  "FAERN.RequestDetail.Denom":                      "Currency",
+  "FAERN.RequestDetail.CounterMessage":             "Message to Player",
+  "FAERN.RequestDetail.CounterMessagePlaceholder":  "Explain your counter offer...",
+  "FAERN.RequestDetail.NotFound":                   "Request not found.",
 
   "FAERN.History.Title":         "Transaction History",
   "FAERN.History.Date":          "Date",
@@ -170,6 +177,7 @@
   "FAERN.Pin.Configure":     "Configure Shop",
   "FAERN.Pin.BrowseAsPlayer":"Preview as Player",
 
+  "FAERN.Notification.NewRequest":      "New purchase request at {shop}.",
   "FAERN.Notification.PendingRequests": "{count} pending purchase request(s) await your review.",
 
   "FAERN.Error.ShopClosed":       "This shop is currently closed.",
